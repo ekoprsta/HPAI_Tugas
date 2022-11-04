@@ -29,17 +29,11 @@
         </div>
       </form>
       <p class="text-center">
-        <a href="" data-bs-toggle="modal" data-bs-target="#register">
+        <a href="" data-bs-toggle="modal" data-bs-target="#register" @click.prevent="toRegisterPage">
           Create an Account
         </a>
-        <!-- <a href="#" @click.prevent="showModal">Create an Account</a> -->
       </p>
     </div>
-    <!-- <Register
-      :newUser="newUser"
-      @handleRegister="handleRegister"
-      @handleRegisterCancel="handleRegisterCancel"
-    ></Register> -->
   </div>
 </template>
 
@@ -83,6 +77,9 @@ export default {
             text: 'Please Check Your email or password'
           })
         })
+    },
+    toRegisterPage () {
+      this.$router.push({ name: 'RegisterPage' })
     }
   },
   created () {

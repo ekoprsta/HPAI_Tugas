@@ -13,7 +13,7 @@ class Controller {
         res.status(201).json({id: data.id, email: data.email})
     })
     .catch((err) => {
-        console.log(err);
+        next(err)
     })
   }
 
@@ -32,7 +32,6 @@ class Controller {
         })
         .catch((err) => {
             next(err)
-            console.log(err);
         })
 
   }

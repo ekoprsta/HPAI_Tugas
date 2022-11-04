@@ -6,11 +6,12 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    newUser: {
-      username: '',
+    userDetail: {
+      name: '',
       email: '',
       password: '',
-      role: ''
+      role: '',
+      createdAt: ''
     },
     login: false,
     usersList: [],
@@ -24,7 +25,9 @@ export default new Vuex.Store({
     },
     SET_USERSLIST (state, payload) {
       state.usersList = payload
-      console.log(this.state.usersList)
+    },
+    SET_USERDETAIL (state, payload) {
+      state.userDetail = payload
     }
   },
   actions: {
@@ -44,6 +47,19 @@ export default new Vuex.Store({
         .then(({ data }) => {
           context.commit('SET_USERSLIST', data.user)
           console.log(data.user)
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    },
+    getUserDetail (context, payload) {
+      axios({
+        url: `http://localhost:3003/api/users/${payload}`,
+        method: 'GET',
+        headers: { accesstoken: localStorage.getItem('accesstoken') }
+      })
+        .then(({ data }) => {
+          context.commit('SET_USERDETAIL', data)
         })
         .catch((error) => {
           console.log(error)

@@ -1,25 +1,28 @@
 <template>
   <div class="home">
-    <table class="table">
-  <thead class="thead-dark">
-    <tr>
-      <th scope="col">ID</th>
-      <th scope="col">Name</th>
-      <th scope="col">Email</th>
-      <th scope="col">Action</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr v-for="(userList, i) in usersList" :key="i">
-      <th scope="row">{{ userList.id }}</th>
-      <td>{{ userList.name }}</td>
-      <td>{{ userList.email }}</td>
-      <td>
-        <button type="button" class="btn btn-danger" @click.prevent="handleDelete(userList.id)">Delete</button> ||
-        <button type="button" class="btn btn-primary" @click.prevent="showDetailUser(userList.id)">Details</button>
-      </td>
-    </tr>
-  </tbody>
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th colspan="4"><center>List Users</center></th>
+      </tr>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr v-for="(userList, i) in usersList" :key="i">
+        <th scope="row">{{ userList.id }}</th>
+        <td>{{ userList.name }}</td>
+        <td>{{ userList.email }}</td>
+        <td>
+          <button type="button" class="btn btn-danger" @click.prevent="handleDelete(userList.id)">Delete</button> ||
+          <button type="button" class="btn btn-primary" @click.prevent="showDetailUser(userList.id)">Details</button>
+        </td>
+      </tr>
+    </tbody>
 </table>
   </div>
 </template>
@@ -68,6 +71,10 @@ export default {
           text: 'Only admin able to delete User'
         })
       }
+    },
+    showDetailUser (id) {
+      this.$store.dispatch('getUserDetail', id)
+      this.$router.push({ name: 'UserDetail', params: { id } })
     }
   },
   computed: {
